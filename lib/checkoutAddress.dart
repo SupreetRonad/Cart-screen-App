@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:puthon/paymentMethod.dart';
 
 class CheckOutAddress extends StatefulWidget {
   @override
@@ -28,7 +29,12 @@ class _CheckOutAddressState extends State<CheckOutAddress> {
       floatingActionButton: FloatingActionButton.extended(
         disabledElevation: 0,
         backgroundColor: name == null ? Colors.grey : Colors.black,
-        onPressed: name == null ? null : () {},
+        onPressed: name == null
+            ? null
+            : () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (builder) => PaymentMethod()));
+              },
         tooltip: 'Choose payment option and Place order',
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
@@ -217,63 +223,6 @@ class _CheckOutAddressState extends State<CheckOutAddress> {
           ],
         ),
       ],
-    );
-  }
-
-  void _orderPlaced() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-          child: Dialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
-            ),
-            backgroundColor: Colors.white,
-            child: SizedBox(
-              height: 170,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.assignment_turned_in,
-                    size: 60,
-                    color: Colors.green,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Order Placed Successfully..!",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.green),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    height: 35,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        color: Colors.black12),
-                    child: TextButton(
-                      onPressed: () {
-                        name = null;
-                        addr = null;
-                        phone = null;
-
-                        Navigator.of(context).pop();
-                        Navigator.of(context).pop();
-                      },
-                      child: Text("OK"),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-        );
-      },
     );
   }
 
